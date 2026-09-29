@@ -1,23 +1,32 @@
-# Quiz it! — Descubra o seu sabor
+# Quiz it! | Descubra o seu sabor
 
-## Estrutura
-```
-quiz-it/
-├── server.js        servidor Node.js (sem dependências)
-├── package.json
-└── public/
-    ├── index.html   a landing page
-    └── img/         logo.png + rótulos (limao, laranja, lemon, guarana, colaz, guaraz, cola)
-```
+Landing page em formato de quiz: a pessoa responde 6 perguntas rápidas e descobre qual sabor de refrigerante it! combina com ela. No final, pode compartilhar o resultado e desafiar um amigo por QR code.
 
-## Rodar no computador
-1. Instale o Node.js (versão 18 ou mais nova): https://nodejs.org
-2. Na pasta do projeto: `npm start`
-3. Abra http://localhost:3000
+## Como funciona
 
-## Colocar no ar
-Suba a pasta em um serviço que rode Node.js (Render, Railway, etc.). Comando de start: `npm start`.
-O QR code da página usa automaticamente o endereço em que ela estiver hospedada.
+1. A pessoa responde 6 perguntas sobre estilo, gostos e momentos.
+2. O quiz soma as respostas e define o sabor que mais apareceu: Cola, Limão, Laranja, Lemon ice ou Guaraná.
+3. Na última pergunta, quem prefere menos açúcar recebe a versão Zero (Cola-Zero ou Guaraná-Zero).
+4. O resultado mostra o rótulo do sabor, uma descrição e o botão de compartilhar.
 
-## Observação
-A fonte (Google Fonts) e a biblioteca do QR code (cdnjs) são carregadas da internet.
+## Tecnologias
+
+- HTML, CSS e JavaScript puro, tudo em um único arquivo
+- Node.js (versão 18 ou mais nova), só para servir os arquivos no computador, sem nenhuma dependência
+- Fontes do Google Fonts, carregadas da internet
+
+
+3. https://refrigeranteit.wookiesbots.shop/
+
+
+O projeto é 100% estático, então funciona em qualquer hospedagem de sites.
+
+
+
+## Créditos
+
+- **Identidade visual:** Rafael Zaher Dominguez
+
+## Aviso
+
+Trabalho acadêmico, sem fins lucrativos. Este projeto não reivindica direitos sobre marcas, logotipos ou imagens, que pertencem aos seus respectivos titulares.
