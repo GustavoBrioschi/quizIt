@@ -1,0 +1,9 @@
+{
+  "name": "quiz-it",
+  "version": "1.0.0",
+  "description": "Landing page quiz: descubra o seu sabor de refrigerante it!",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" },
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Qual é o seu it!? Descubra o seu sabor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Archivo:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0a;--accent:#9b1c20;--dark:#4a0d10;--ink:#fff;--yellow:#f0e422;
+  --font:'Archivo','Helvetica Neue',Arial,sans-serif;--logo:'Titan One','Arial Black',Impact,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#fff}}
+:root[data-theme="dark"]{--ink:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:var(--font);transition:background .5s;overflow-x:hidden;position:relative}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,var(--accent) 2.2px,transparent 2.8px);background-size:16px 16px;
+  -webkit-mask-image:linear-gradient(100deg,#000 0%,transparent 55%);mask-image:linear-gradient(100deg,#000 0%,transparent 55%);opacity:.9}
+main{position:relative;max-width:920px;margin:0 auto;padding:28px 20px 40px;min-height:100vh;display:flex;flex-direction:column}
+.logo{position:relative;display:inline-block;isolation:isolate;font-family:var(--logo);font-style:italic;color:#fff;line-height:1;transform:rotate(-6deg);
+  -webkit-text-stroke:.09em #000;paint-order:stroke fill;text-shadow:.05em .06em 0 #999;letter-spacing:.02em}
+.logo::before{content:attr(data-t);position:absolute;left:0;top:0;z-index:-1;-webkit-text-stroke:.3em var(--yellow);color:var(--yellow);text-shadow:none}
+.logo.z{color:#000;text-shadow:none;-webkit-text-stroke:.09em var(--accent);paint-order:stroke fill}
+.logo.z::before{-webkit-text-stroke:.3em var(--accent);color:var(--accent)}
+.lg{display:block;height:auto}.hero-lg{width:clamp(230px,62vw,400px);margin:10px 0 0 6px}.top-lg{width:62px}.tile{display:block;width:min(100%,330px);margin:0 auto;border-radius:14px;box-shadow:0 10px 0 rgba(0,0,0,.4)}
+.tag{display:inline-block;background:var(--accent);color:#fff;font-weight:800;border-radius:0 0 22px 22px;padding:10px 26px 12px;font-size:clamp(1.4rem,5vw,2.2rem);letter-spacing:-.01em;box-shadow:0 6px 0 rgba(0,0,0,.35)}
+.tag.dk{color:#000}
+.screen{flex:1;display:none;flex-direction:column;justify-content:center}
+.screen.on{display:flex}
+/* intro */
+.hero{display:grid;grid-template-columns:1fr;gap:28px;align-items:center;text-align:left}
+@media(min-width:760px){.hero{grid-template-columns:1fr 1fr}}
+.hero .logo{font-size:clamp(9rem,32vw,15rem);margin:10px 0 0 10px}
+h1{font-size:clamp(2rem,6.5vw,3.6rem);line-height:1.02;margin:0 0 14px;font-weight:800;letter-spacing:-.02em}
+.lede{font-size:1.1rem;line-height:1.5;max-width:34ch;margin:0 0 26px;opacity:.92}
+.btn{font:800 1.15rem var(--font);background:var(--yellow);color:#000;border:0;border-radius:16px;padding:16px 30px;cursor:pointer;box-shadow:0 6px 0 #000;transition:transform .12s,box-shadow .12s}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 #000}
+.btn.ghost{background:transparent;color:#fff;box-shadow:none;border:2px solid #fff;font-size:1rem;padding:12px 22px}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chip{font-weight:700;font-size:.85rem;border-radius:999px;padding:6px 14px;color:#fff}
+/* quiz */
+.top{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.top .logo{font-size:2.6rem}
+.bar{flex:1;height:12px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--yellow);border-radius:99px;transition:width .4s}
+.count{font-weight:800;font-size:.95rem}
+.q{font-size:clamp(1.8rem,6vw,3rem);line-height:1.05;font-weight:800;letter-spacing:-.02em;margin:0 0 24px;max-width:18ch}
+.opts{display:grid;gap:12px}
+@media(min-width:760px){.opts{grid-template-columns:1fr 1fr}}
+.opt{font:700 1.1rem var(--font);text-align:left;color:#fff;background:rgba(0,0,0,.62);border:2px solid rgba(255,255,255,.35);border-radius:18px;padding:18px 20px;cursor:pointer;transition:transform .12s,background .12s,border-color .12s}
+.opt:hover{border-color:var(--yellow);transform:translateY(-2px)}
+.opt.sel{background:var(--yellow);color:#000;border-color:#000}
+/* result */
+.res{display:grid;gap:26px;align-items:center}
+@media(min-width:760px){.res{grid-template-columns:1fr 1fr}}
+.card{position:relative;text-align:center;padding:26px 10px 0}
+.card .logo{font-size:clamp(9rem,34vw,14rem)}
+.card .tag{display:block;margin:-6px auto 0;max-width:340px}
+.kicker{font-weight:800;font-size:1rem;margin:0 0 6px}
+.res h2{font-size:clamp(2.2rem,8vw,4rem);line-height:1;margin:0 0 12px;font-weight:800;letter-spacing:-.03em}
+.res p{line-height:1.5;font-size:1.1rem;max-width:36ch;margin:0 0 22px}
+.acts{display:flex;flex-wrap:wrap;gap:12px}
+.more{margin-top:34px}
+.more h3{font-size:1.3rem;margin:0 0 12px}
+.grid{align-items:start;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:520px}
+.sw{width:100%;height:auto;display:block;border-radius:6px}
+.sw.me{outline:4px solid var(--yellow);outline-offset:2px}
+footer{margin-top:36px;font-size:.85rem;display:flex;flex-wrap:wrap;gap:10px 20px;justify-content:space-between;opacity:.85}
+footer a{color:#fff;font-weight:700}
+.acad{flex-basis:100%;margin:6px 0 0;padding-top:12px;border-top:1px solid rgba(255,255,255,.3);font-size:.8rem;line-height:1.4;opacity:.9}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.qr{display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.75);border-radius:22px;padding:12px 18px 12px 12px;margin-top:24px;width:fit-content;max-width:100%}
+.qr p{margin:0;font-weight:800;font-size:1rem;line-height:1.2;max-width:14ch}
+.qrbox{background:#fff;padding:8px;border-radius:14px;line-height:0}.qrbox img,.qrbox canvas{width:104px!important;height:104px!important}
+</style>
+</head>
+<body>
+<main>
+  <section class="screen on" id="intro">
+    <div class="hero">
+      <div><img class="lg hero-lg" id="lg1" alt="it!"></div>
+      <div>
+        <h1>Mais sabor.<br>Mais momento.</h1>
+        <p class="lede">Responda 6 perguntas rápidas e descubra qual é o seu it!</p>
+        <button class="btn" id="start">Começar o quiz</button>
+        <div class="chips" id="chips"></div>
+        <div class="qr" id="qr1"><div class="qrbox" id="qrc1"></div><p>Qual é o seu it!? Escaneie e jogue no celular</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="quiz">
+    <div class="top"><img class="lg top-lg" id="lg2" alt="it!"><div class="bar"><i id="fill"></i></div><span class="count" id="count"></span></div>
+    <h2 class="q" id="q"></h2>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  <section class="screen" id="result">
+    <div class="res">
+      <div class="card"><img class="tile" id="rtile" alt=""></div>
+      <div>
+        <p class="kicker" id="rkick"></p>
+        <h2 id="rname"></h2>
+        <p id="rdesc"></p>
+        <div class="acts">
+          <button class="btn" id="share">Compartilhar</button>
+          <button class="btn ghost" id="redo">Refazer o quiz</button>
+        </div>
+        <div class="qr"><div class="qrbox" id="qrc2"></div><p>Escaneie e desafie um amigo</p></div>
+      </div>
+    </div>
+    <div class="more"><h3>Descubra o seu it!</h3><div class="grid" id="grid"></div></div>
+  </section>
+
+  <footer><span>Refrigerante it! · Indústria brasileira · SAC 0800 727 9877</span><a href="https://refrigeranteit.com.br" target="_blank" rel="noopener">refrigeranteit.com.br</a>
+  <p class="acad">Trabalho acadêmico, sem fins lucrativos. Este projeto não reivindica direitos sobre marcas, logotipos ou imagens, que pertencem aos seus respectivos titulares.</p></footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+var SITE="https://claude.ai/artifact/8vs9yRyfF1BojJDTBpo8af";
+try{if(/^https?:$/.test(location.protocol)&&!/claude/i.test(location.hostname))SITE=location.href.split("#")[0]}catch(e){}
+var F={
+ cola:{n:"Cola",bg:"#0a0a0a",ac:"#9b1c20",dk:"#4a0d10",kick:"REFRIGERANTE SABOR COLA",d:"Clássico, intenso e sempre no clima do rolê. Você é do tipo que vai direto ao que importa."},
+ limao:{n:"Limão",bg:"#2d9a44",ac:"#154a24",dk:"#0e3319",kick:"REFRIGERANTE SABOR LIMÃO",d:"Fresco, vibrante e cheio de energia. Onde você chega, o astral melhora na hora."},
+ laranja:{n:"Laranja",bg:"#f58426",ac:"#f15a29",dk:"#8a2c0c",kick:"REFRIGERANTE SABOR LARANJA",d:"Solar, animado e contagiante. Para quem transforma qualquer dia em festa."},
+ lemon:{n:"Lemon ice",bg:"#1f4a94",ac:"#3a7bbf",dk:"#0f2a58",kick:"REFRIGERANTE SABOR LIMÃO",d:"Gelado, ousado e diferente de todo mundo. Você abre o caminho e os outros seguem."},
+ guarana:{n:"Guaraná",bg:"#04120a",ac:"#1b5e2c",dk:"#0a2a14",kick:"REFRIGERANTE SABOR GUARANÁ",d:"Brasileiro de coração, genuíno e sempre por perto. Todo mundo quer você na mesa."},
+ colaz:{n:"Cola-Zero",bg:"#000",ac:"#9b1c20",dk:"#4a0d10",kick:"REFRIGERANTE SABOR COLA · MENOS AÇÚCAR",d:"Todo o sabor da cola com menos açúcar. Você quer curtir o momento sem abrir mão de nada.",z:1},
+ guaraz:{n:"Guaraná-Zero",bg:"#000",ac:"#2d9a44",dk:"#0a2a14",kick:"REFRIGERANTE SABOR GUARANÁ · MENOS AÇÚCAR",d:"O guaraná de sempre com menos açúcar. Leve, brasileiro e pronto para qualquer momento.",z:1}
+};
+var Q=[
+ {q:"Onde está o seu melhor momento?",o:[["Num rolê com os amigos até tarde","cola"],["Na praia, com sol na cara","laranja"],["Num almoço de domingo com a família","guarana"],["No fim da tarde, sem pressa","limao"],["Numa maratona de série bem gelada","lemon"]]},
+ {q:"Como seus amigos descrevem você?",o:[["Divertido e cheio de ideias","laranja"],["Calmo e de bom papo","limao"],["Autêntico e sempre presente","guarana"],["Original e fora da caixa","lemon"],["Intenso e direto ao ponto","cola"]]},
+ {q:"Qual playlist toca agora?",o:[["Rock e pop clássicos","cola"],["Pagode e samba","guarana"],["Pop animado para dançar","laranja"],["Eletrônica e sons geladinhos","lemon"],["Acústico e leve","limao"]]},
+ {q:"Escolha um superpoder:",o:[["Voar para qualquer lugar","lemon"],["Ser irresistível em qualquer festa","cola"],["Deixar todo mundo de bom humor","laranja"],["Nunca perder a energia","guarana"],["Trazer calma para qualquer situação","limao"]]},
+ {q:"Que sabor combina com o seu dia perfeito?",o:[["Cítrico e refrescante","limao"],["Doce e ensolarado","laranja"],["Marcante e clássico","cola"],["Cítrico com um toque gelado","lemon"],["Brasileiro e cheio de energia","guarana"]]},
+ {q:"E o açúcar?",o:[["Quero o sabor completo","full"],["Prefiro menos açúcar","zero"]]}
+];
+var $=function(i){return document.getElementById(i)};
+var A={l:"img/logo.png",t:{limao:"img/limao.jpg",laranja:"img/laranja.jpg",lemon:"img/lemon.jpg",guarana:"img/guarana.jpg",colaz:"img/colaz.jpg",guaraz:"img/guaraz.jpg",cola:"img/cola.jpg"}};
+$("lg1").src=A.l;$("lg2").src=A.l;
+var picks,step;
+function show(id){["intro","quiz","result"].forEach(function(s){$(s).classList.toggle("on",s===id)});window.scrollTo(0,0)}
+function theme(k){var f=F[k]||F.cola,r=document.documentElement.style;r.setProperty("--bg",f.bg);r.setProperty("--accent",f.ac);r.setProperty("--dark",f.dk)}
+function chips(){$("chips").innerHTML=["cola","limao","laranja","lemon","guarana","colaz","guaraz"].map(function(k){var f=F[k];return '<span class="chip" style="background:'+(f.bg==="#000"||f.bg==="#0a0a0a"||f.bg==="#04120a"?f.ac:f.bg)+'">'+f.n+'</span>'}).join("")}
+function ask(){
+  var c=Q[step];$("q").textContent=c.q;$("count").textContent=(step+1)+"/"+Q.length;$("fill").style.width=(step/Q.length*100)+"%";
+  $("opts").innerHTML="";
+  c.o.forEach(function(o){var b=document.createElement("button");b.className="opt";b.textContent=o[0];
+    b.onclick=function(){b.classList.add("sel");picks.push(o[1]);setTimeout(function(){step++;step<Q.length?ask():finish()},220)};
+    $("opts").appendChild(b)});
+}
+function finish(){
+  var cnt={},last={},zero=false;
+  picks.forEach(function(p,i){if(p==="zero")zero=true;else if(p!=="full"){cnt[p]=(cnt[p]||0)+1;last[p]=i}});
+  var best=null;for(var k in cnt){if(!best||cnt[k]>cnt[best]||(cnt[k]===cnt[best]&&last[k]>last[best]))best=k}
+  if(zero&&best==="cola")best="colaz";if(zero&&best==="guarana")best="guaraz";
+  var f=F[best];theme(best);
+  $("rtile").src=A.t[best];$("rtile").alt=f.n;
+  $("rkick").textContent=f.kick;$("rname").textContent="Seu it! é "+f.n;$("rdesc").textContent=f.d;
+  $("grid").innerHTML=["cola","limao","laranja","lemon","guarana","colaz","guaraz"].map(function(k){var g=F[k];
+    return '<img class="sw'+(k===best?' me':'')+'" alt="'+g.n+'" src="'+A.t[k]+'">'}).join("");
+  $("share").onclick=function(){
+    var t="Meu it! é "+f.n+"! Descubra o seu:";
+    try{if(navigator.share){navigator.share({title:"Qual é o seu it!?",text:t,url:"https://refrigeranteit.com.br"});return}}catch(e){}
+    try{navigator.clipboard.writeText(t+" https://refrigeranteit.com.br");$("share").textContent="Copiado!"}catch(e){}
+  };
+  show("result");
+}
+$("start").onclick=function(){picks=[];step=0;theme("cola");show("quiz");ask()};
+$("redo").onclick=function(){theme("cola");$("share").textContent="Compartilhar";show("intro")};
+chips();
+["qrc1","qrc2"].forEach(function(i){$(i).innerHTML='<img src="img/qrcode.png" alt="QR code refrigeranteit.wookiesbots.shop" width="104" height="104">'});
+</script>
+</body>
+</html>
